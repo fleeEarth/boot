@@ -19,6 +19,7 @@ public class MsgController {
 			return "发送成功！";
 		} catch (IOException e) {
 			return "发送失败！";
+
 		}
 	}
 
