@@ -13,7 +13,7 @@ import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
-@RequestMapping(method = RequestMethod.POST)
+@RequestMapping(method = RequestMethod.GET)
 @Controller
 public class LoginController {
 
@@ -21,6 +21,12 @@ public class LoginController {
 	private LoginService loginService;
 
 	@RequestMapping("/login")
+	public ModelAndView index(){
+
+		return new ModelAndView("/user/login");
+	}
+
+	@RequestMapping(value = "/checkLogin" ,method = RequestMethod.POST)
 	public ModelAndView login(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {
 		//ModelMap map = new ModelMap();
 		ModelAndView model = new ModelAndView();
