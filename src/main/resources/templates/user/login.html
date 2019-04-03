@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+</head>
+<body>
+<span th:text="${errmsg}"></span>
+<form  action="login" method="post" autocomplete="off">
+    账户：<input name="username" value="">
+    密码：<input name="password" value="">
+    <button type="submit" >登陆</button>
+</form>
+</body>
+</html>

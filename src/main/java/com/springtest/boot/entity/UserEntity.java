@@ -1,9 +1,11 @@
 package com.springtest.boot.entity;
 
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class UserEntity {
+public class UserEntity implements Serializable {
+
 	private String userId;
 	private String username;
 	private String password;

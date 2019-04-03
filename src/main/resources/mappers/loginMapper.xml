@@ -1,11 +1,10 @@
-
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springtest.boot.dao.LoginMapper">
 
-    <resultMap type="com.springtest.boot.entity" id="userEntity">
+    <resultMap type="com.springtest.boot.entity.UserEntity" id="userEntity">
         <result property="userId" column="userId" jdbcType="VARCHAR" javaType="String" />
         <result property="username" column="username" jdbcType="VARCHAR" javaType="String" />
         <result property="password" column="password" jdbcType="VARCHAR" javaType="String" />
@@ -14,8 +13,7 @@
         <result property="blacks" column="blacks" jdbcType="VARCHAR" javaType="String" />
     </resultMap>
 
-    <sql id="login">
-
-    </sql>
-
+    <select id="login">
+        select * from tb_user where username = #{username} and password = #{password}
+    </select>
 </mapper>
