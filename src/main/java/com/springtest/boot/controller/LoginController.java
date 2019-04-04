@@ -2,10 +2,12 @@ package com.springtest.boot.controller;
 
 import com.springtest.boot.entity.UserEntity;
 import com.springtest.boot.service.LoginService;
-import com.springtest.boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.util.StringUtils;
 
@@ -38,6 +40,7 @@ public class LoginController {
 			return model;
 		}
 		if(user!=null){
+			user.setPassword("");
 			request.getSession().setAttribute("userInfo",user);
 			model.setViewName("/index");
 			return model;
@@ -49,8 +52,6 @@ public class LoginController {
 
 
 	}
-
-
 
 	@ExceptionHandler
 	public ModelAndView excep(Exception e){
