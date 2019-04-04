@@ -5,10 +5,14 @@
     <title>注册</title>
 </head>
 <body>
-<form action="registry" autocomplete="off" method="post">
-    账号：<input name="usernmae" value="">
-    密码：<input name="password" value="">
-    确认密码：<input name="password2" value="">
+<form action="checkRegistry" autocomplete="off" method="post">
+    账号：<input name="username" value=""><br>
+    密码：<input name="password" value=""><br>
+    确认密码：<input name="password2" value=""><br>
+    年龄:<input name="age" value=""><br>
+    性别：<input name="sex" type="radio" value="0">男<input name="sex" type="radio" value="1">女<br>
+    手机:<input name="phone" value=""><br>
+    E-mail:<input name="email" value=""><br>
     <button type="submit">注册</button>
 </form>
 </body>

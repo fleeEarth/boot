@@ -101,4 +101,19 @@ public class UserEntity implements Serializable {
 	public int hashCode() {
 		return Objects.hash(userId, username);
 	}
+
+	@Override
+	public String toString() {
+		return "UserEntity{" +
+				       "userId=" + userId +
+				       ", username='" + username + '\'' +
+				       ", password='" + password + '\'' +
+				       ", groupId='" + groupId + '\'' +
+				       ", firends='" + firends + '\'' +
+				       ", sex='" + sex + '\'' +
+				       ", age='" + age + '\'' +
+				       ", phone='" + phone + '\'' +
+				       ", email='" + email + '\'' +
+				       '}';
+	}
 }

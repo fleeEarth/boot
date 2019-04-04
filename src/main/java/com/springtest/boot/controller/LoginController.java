@@ -2,11 +2,10 @@ package com.springtest.boot.controller;
 
 import com.springtest.boot.entity.UserEntity;
 import com.springtest.boot.service.LoginService;
+import com.springtest.boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.util.StringUtils;
 
@@ -19,14 +18,16 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
+
+
 	@RequestMapping("/login")
-	public ModelAndView index(){
+	public ModelAndView login(){
 
 		return new ModelAndView("/user/login");
 	}
 
 	@RequestMapping(value = "/checkLogin" ,method = RequestMethod.POST)
-	public ModelAndView login(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {
+	public ModelAndView checkLogin(@RequestParam String username, @RequestParam String password, HttpServletRequest request) {
 		//ModelMap map = new ModelMap();
 		ModelAndView model = new ModelAndView();
 		UserEntity user = loginService.login(username, password);
@@ -49,15 +50,14 @@ public class LoginController {
 
 	}
 
-	@RequestMapping("/registry")
-	public ModelAndView registry(@RequestParam String username,@RequestParam String password,@RequestParam String password2){
+
+
+	@ExceptionHandler
+	public ModelAndView excep(Exception e){
 		ModelAndView model = new ModelAndView();
-
-
-
+		System.out.println("LoginController Excep:"+ e.getMessage());
+		model.setViewName("/excep/500");
 		return model;
 	}
-
-
 
 }
