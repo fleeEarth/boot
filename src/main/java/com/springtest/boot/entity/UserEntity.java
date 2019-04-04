@@ -6,18 +6,21 @@ import java.util.Objects;
 
 public class UserEntity implements Serializable {
 
-	private String userId;
+	private Integer userId;
 	private String username;
 	private String password;
 	private String groupId;
 	private String firends;
-	private String blacks;
+	private String sex; //0男1女
+	private String age;
+	private String phone;
+	private String email;
 
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
@@ -53,12 +56,36 @@ public class UserEntity implements Serializable {
 		this.firends = firends;
 	}
 
-	public String getBlack() {
-		return blacks;
+	public String getSex() {
+		return sex;
 	}
 
-	public void setBlack(String blacks) {
-		this.blacks = blacks;
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override

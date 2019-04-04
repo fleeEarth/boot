@@ -18,7 +18,7 @@ public class MsgController {
 	public String send(@RequestParam String msg, HttpServletRequest request) {
 		try {
 			UserEntity userInfo = (UserEntity)request.getSession().getAttribute("userInfo");
-			MessageService.sendMsgToUser(msg, userInfo.getUserId());
+			MessageService.sendMsgToUser(msg, userInfo.getUserId().toString());
 			return "发送成功！";
 		} catch (IOException e) {
 			return "发送失败！";

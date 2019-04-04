@@ -4,16 +4,30 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springtest.boot.dao.LoginMapper">
 
-    <resultMap type="com.springtest.boot.entity.UserEntity" id="userEntity">
-        <result property="userId" column="userId" jdbcType="VARCHAR" javaType="String" />
+   <!-- <resultMap type="com.springtest.boot.entity.UserEntity" id="userEntity">
+        <result property="userId" column="userId" jdbcType="int" javaType="Integer" />
         <result property="username" column="username" jdbcType="VARCHAR" javaType="String" />
         <result property="password" column="password" jdbcType="VARCHAR" javaType="String" />
         <result property="groupId" column="groupId" jdbcType="VARCHAR" javaType="String" />
-        <result property="firends" column="firends" jdbcType="VARCHAR" javaType="String" />
-        <result property="blacks" column="blacks" jdbcType="VARCHAR" javaType="String" />
-    </resultMap>
+        <result property="friends" column="friends" jdbcType="VARCHAR" javaType="String" />
+        <result property="sex" column="sex" jdbcType="VARCHAR" javaType="String" />
+        <result property="age" column="age" jdbcType="VARCHAR" javaType="String" />
+        <result property="phone" column="phone" jdbcType="VARCHAR" javaType="String" />
+        <result property="email" column="email" jdbcType="VARCHAR" javaType="String" />
+    </resultMap>-->
 
-    <select id="login">
-        select * from tb_user where username = #{username} and password = #{password}
+    <select id="login" resultType="com.springtest.boot.entity.UserEntity" >
+        select userId,
+               username,
+               password,
+               groupId,
+               friends,
+               sex,
+               age,
+               phone,
+               email
+        from tb_user
+        where username = #{username}
+        and password = #{password}
     </select>
 </mapper>

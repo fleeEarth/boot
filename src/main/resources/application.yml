@@ -8,12 +8,13 @@ spring:
   resources:
     static-locations: classpath:/static/
   datasource:
-    url: jdbc\:mysql\://127.0.0.1\:3306/boot
+    #连接mysql8.0后报错需要加上characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    url: jdbc:mysql://127.0.0.1:3306/boot?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
     username: root
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
-  mapper-locations: classpath:/mapper/*.xml
+  mapper-locations: classpath:/mappers/*.xml
   type-aliases-package: com.springtest.boot.entity
 
 
