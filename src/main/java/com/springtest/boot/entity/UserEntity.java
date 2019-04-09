@@ -10,7 +10,7 @@ public class UserEntity implements Serializable {
 	private String username;
 	private String password;
 	private String groupId;
-	private String firends;
+	private String friends;
 	private String sex; //0男1女
 	private String age;
 	private String phone;
@@ -48,12 +48,12 @@ public class UserEntity implements Serializable {
 		this.groupId = groupId;
 	}
 
-	public String getFirends() {
-		return firends;
+	public String getFriends() {
+		return friends;
 	}
 
-	public void setFirends(String firends) {
-		this.firends = firends;
+	public void setFriends(String friends) {
+		this.friends = friends;
 	}
 
 	public String getSex() {
@@ -109,7 +109,7 @@ public class UserEntity implements Serializable {
 				       ", username='" + username + '\'' +
 				       ", password='" + password + '\'' +
 				       ", groupId='" + groupId + '\'' +
-				       ", firends='" + firends + '\'' +
+				       ", friends='" + friends + '\'' +
 				       ", sex='" + sex + '\'' +
 				       ", age='" + age + '\'' +
 				       ", phone='" + phone + '\'' +

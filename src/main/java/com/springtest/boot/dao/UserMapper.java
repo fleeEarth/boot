@@ -16,4 +16,5 @@ public interface UserMapper {
 
 	public List<String> checkName(@Param("username") String username);
 
+	public Long registry(@Param("user") UserEntity user);
 }

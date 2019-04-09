@@ -13,17 +13,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfigurer implements WebMvcConfigurer {
 
+
 	@Autowired
 	private LoginInterceptor loginInterceptor;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(loginInterceptor).addPathPatterns("/**")
-				.excludePathPatterns("/login","/checkLogin","/registry","/checkRegistry");
+				.excludePathPatterns("/login","/checkLogin",
+						"/checkCode","/getCode",
+						"/registry","/checkRegistry",
+						"/static/**","/");
 	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
+		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
 	}
 }

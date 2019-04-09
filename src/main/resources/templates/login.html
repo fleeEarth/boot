@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+</head>
+<body>
+<div>没有账号<a href="registry">点击注册</a></div>
+<span th:text="${errmsg}"></span>
+<form action="checkLogin" method="post" autocomplete="off">
+    账户：<input type="text" name="username" value=""><br/>
+    密码：<input type="password" name="password" value=""><br/>
+    <span id="codeMsg" style="color:red;"></span><br/>
+    验证码：<input  id="code" onblur="checkCode();" name="code" value="">
+    <img  onclick="refCode()" id="imgCode" src="getCode" style="width: 100px; height: 30px;"><br/>
+    <button type="button" id="sub" >登陆</button>
+</form>
+</body>
+<script type="text/javascript" src="static/js/jquery-3.3.1.min.js" ></script>
+<script type="text/javascript">
+    var flag = false;
+    function refCode(){
+        var img = document.getElementById("imgCode");
+        img.src= "getCode?"+new Date().getTime();
+    }
+    function checkCode(){
+       var code = document.getElementById('code').value;
+       if(code==""){
+           document.getElementById('codeMsg').innerHTML="验证码不能为空！";
+       }else{
+           $.ajax({
+               url:"checkCode?code="+code,
+               type:"get",
+               success:function(data){
+                   if(data==true){
+                        document.getElementById('codeMsg').innerHTML="验证码正确！";
+                        flag=true;
+                   }else{
+                        document.getElementById('codeMsg').innerHTML="验证码错误！";
+                   }
+               }
+           });
+       }
+    }
+
+    $("#sub").click(function(){
+        var username = $("input[name='username']").val();
+        var password = $("input[name='password']").val();
+        if(username.length>=5 && password.length >=6 && flag){
+            $("form:first").submit();
+        }
+    });
+
+</script>
+
+</html>

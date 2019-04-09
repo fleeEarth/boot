@@ -39,7 +39,13 @@ public class RegistryController {
 			model.addObject("errmsg","注册信息有误！");
 			model.setViewName("/user/registry");
 		}
-		model.setViewName("/user/login");
+		boolean flag = userService.registryUser(user);
+		if(flag){
+			model.setViewName("/user/regsuccess");
+		}else{
+			model.addObject("errmsg","注册信息有误！");
+			model.setViewName("/user/registry");
+		}
 		return model;
 	}
 

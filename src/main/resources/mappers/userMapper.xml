@@ -4,9 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springtest.boot.dao.UserMapper">
 
-    <select id="login" resultType="java.lang.String">
+    <select id="checkName" resultType="java.lang.String">
         select username
         from tb_user
         where username = #{username}
     </select>
+    
+    <insert id="registry" parameterType="com.springtest.boot.entity.UserEntity">
+        insert into tb_user (username,password,age,sex,groupId,friends,phone,email)
+        values (#{user.username},#{user.password},#{user.age},#{user.sex},
+        #{user.groupId},#{user.friends},#{user.phone},#{user.email});
+    </insert>
+    
 </mapper>

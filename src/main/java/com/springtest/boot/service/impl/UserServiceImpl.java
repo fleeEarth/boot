@@ -26,4 +26,14 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;
 	}
+
+	@Override
+	public boolean registryUser(UserEntity user) {
+
+		Long l = userMapper.registry(user);
+		if(l==1){
+			return true;
+		}
+		return false;
+	}
 }

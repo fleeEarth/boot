@@ -6,6 +6,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * @Author: zh
@@ -16,10 +18,10 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		Object userInfo = request.getSession().getAttribute("userInfo");
-		System.out.println("拦截了！");
 		if(userInfo!=null){
 			return true;
 		}
+		System.out.println("拦截了！");
 		return false;
 	}
 
