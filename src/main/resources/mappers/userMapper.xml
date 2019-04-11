@@ -15,5 +15,14 @@
         values (#{user.username},#{user.password},#{user.age},#{user.sex},
         #{user.groupId},#{user.friends},#{user.phone},#{user.email});
     </insert>
+
+    <update id="update" parameterType="com.springtest.boot.entity.UserEntity">
+        update tb_user set
+          age = #{user.age},
+          sex = #{user.sex},
+          phone = #{user.phone},
+          email = #{user.email}
+        where userId = #{user.userId}
+    </update>
     
 </mapper>

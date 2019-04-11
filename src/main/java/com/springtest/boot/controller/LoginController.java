@@ -2,13 +2,17 @@ package com.springtest.boot.controller;
 
 import com.springtest.boot.entity.UserEntity;
 import com.springtest.boot.service.LoginService;
+import com.springtest.boot.utils.AESUtil;
 import com.springtest.boot.utils.CheckCodeUtil;
+import com.springtest.boot.utils.MyUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.util.StringUtils;
+import sun.security.util.KeyUtil;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -16,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
+import java.util.UUID;
 
 @RequestMapping(method = RequestMethod.GET)
 @Controller
@@ -27,9 +32,15 @@ public class LoginController {
 
 
 	@RequestMapping("/login")
-	public ModelAndView login(){
-
-		return new ModelAndView("/login");
+	public ModelAndView login(HttpServletRequest request){
+		ModelAndView model = new ModelAndView("/login");
+		String key = MyUIDUtil.UID();//密钥
+		String iv = MyUIDUtil.UID();//偏移量
+		model.addObject("iv",iv);
+		model.addObject("key",key);
+		request.getSession().setAttribute("key",key);
+		request.getSession().setAttribute("iv",iv);
+		return model;
 	}
 
 	@RequestMapping("/")
@@ -38,14 +49,20 @@ public class LoginController {
 		if(userInfo!=null){
 			return new ModelAndView("/user/index");
 		}
-		return new ModelAndView("/login");
+		ModelAndView model = new ModelAndView("/login");
+		String key = MyUIDUtil.UID();//密钥
+		String iv = MyUIDUtil.UID();//偏移量
+		model.addObject("iv",iv);
+		model.addObject("key",key);
+		request.getSession().setAttribute("key",key);
+		request.getSession().setAttribute("iv",iv);
+		return model;
 	}
 
 	@RequestMapping(value = "/checkLogin" ,method = RequestMethod.POST)
 	public ModelAndView checkLogin(@RequestParam String username, @RequestParam String password,@RequestParam String code, HttpServletRequest request) {
 		//ModelMap map = new ModelMap();
 		ModelAndView model = new ModelAndView();
-		UserEntity user = loginService.login(username, password);
 		if(StringUtils.isEmpty(username) && StringUtils.isEmpty(password)){
 			//map.addAttribute("errmsg","请输入用户名和密码！");
 			model.setViewName("/login");
@@ -58,6 +75,10 @@ public class LoginController {
 			model.addObject("errmsg","验证码不正确!");
 			return model;
 		}
+		String key = (String)request.getSession().getAttribute("key");
+		String iv = (String)request.getSession().getAttribute("iv");
+		String pwd = AESUtil.decrypt(password, key, iv);
+		UserEntity user = loginService.login(username, pwd);
 		if(user!=null){
 			user.setPassword("");
 			request.getSession().setAttribute("userInfo",user);
@@ -89,7 +110,6 @@ public class LoginController {
 		}
 		return false;
 	}
-
 
 
 

@@ -17,7 +17,9 @@
 </form>
 </body>
 <script type="text/javascript" src="static/js/jquery-3.3.1.min.js" ></script>
-<script type="text/javascript">
+<script type="text/javascript" src="static/js/jiami.js" ></script>
+<script type="text/javascript" src="static/js/aes.js" ></script>
+<script type="text/javascript" th:inline="javascript">
     var flag = false;
     function refCode(){
         var img = document.getElementById("imgCode");
@@ -46,7 +48,12 @@
     $("#sub").click(function(){
         var username = $("input[name='username']").val();
         var password = $("input[name='password']").val();
+        var pwd = CryptoJS.enc.Utf8.parse(password);
+        var key = CryptoJS.enc.Utf8.parse([[${key}]]);
+        var iv = CryptoJS.enc.Utf8.parse([[${iv}]]);
+        pwd = CryptoJS.AES.encrypt(pwd,key,{iv:iv,mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7});
         if(username.length>=5 && password.length >=6 && flag){
+            $("input[name='password']").val(pwd);
             $("form:first").submit();
         }
     });
